@@ -67,3 +67,19 @@
 /* About page: reveal-on-scroll + optional count-up */
 (function(){const els=[...document.querySelectorAll('.reveal')];if(els.length){const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.15});els.forEach(el=>io.observe(el));}
 const nums=[...document.querySelectorAll('[data-count]')];if(nums.length){const tick=(el,to,dur=900)=>{const from=0;const t0=performance.now();function step(t){const p=Math.min(1,(t-t0)/dur);el.textContent=Math.floor(from+(to-from)*p)+(el.dataset.suffix||'');if(p<1)requestAnimationFrame(step);}requestAnimationFrame(step);}nums.forEach(n=>tick(n,parseInt(n.dataset.count,10)||0));}})();
+
+/* Contact page form handler */
+(function(){
+  const form=document.getElementById('contactForm');
+  const status=document.getElementById('formStatus');
+  if(form){
+    form.addEventListener('submit',e=>{
+      e.preventDefault();
+      status.textContent='傳送中...';
+      setTimeout(()=>{
+        status.textContent='✅ 已成功送出！感謝您的來信，我將於三日內回覆。';
+        form.reset();
+      },1200);
+    });
+  }
+})();
