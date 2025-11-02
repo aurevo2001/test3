@@ -22,8 +22,9 @@ img{display:block;width:100%;height:auto;border-radius:12px}
 /* ====== HERO（正方形框 + 自動輪播 + 左下漸層） ====== */
 .hero-showcase{position:relative;width:100%;aspect-ratio:16/9;max-height:560px;overflow:hidden;background:#000}
 .hero-slider{position:absolute;inset:0;overflow:hidden}
-.track{display:flex;height:100%;transition:transform .7s ease}
-.slide{flex:0 0 100%;position:relative}
+.track{position:relative;height:100%}
+/* 用絕對定位堆疊每張，之後用透明度輪播 */
+.slide{position:absolute;inset:0;opacity:0;animation:heroFade 15s infinite ease-in-out}
 .slide img{width:100%;height:100%;object-fit:cover;object-position:center}
 
 /* 左下透明漸層區塊 */
@@ -42,6 +43,26 @@ img{display:block;width:100%;height:auto;border-radius:12px}
 }
 .hero-caption h1{margin:0;font-size:32px;line-height:1.15}
 .hero-caption p{margin:0;font-size:16px;color:#222;line-height:1.4}
+
+/* 三張圖分別錯開時間播放（每張顯示約 5 秒） */
+.slide:nth-child(1){animation-delay:0s}
+.slide:nth-child(2){animation-delay:5s}
+.slide:nth-child(3){animation-delay:10s}
+
+/* 交叉淡入淡出：可視 0–30%，在 33% 前後切換 */
+@keyframes heroFade{
+  0%{opacity:1}
+  30%{opacity:1}
+  33%{opacity:0}
+  97%{opacity:0}
+  100%{opacity:1}
+}
+
+/* 無障礙：若使用者偏好減少動畫，就只顯示第一張 */
+@media (prefers-reduced-motion:reduce){
+  .slide{animation:none}
+  .slide:nth-child(1){opacity:1}
+}
 
 /* ====== 首頁作品精選 ====== */
 .section{padding:54px 18px}
