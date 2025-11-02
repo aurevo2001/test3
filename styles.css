@@ -47,7 +47,6 @@ img{display:block;width:100%;height:auto;border-radius:12px}
 /* 三張圖分別錯開時間播放（每張顯示約 5 秒） */
 .slide:nth-child(1){animation-delay:0s}
 .slide:nth-child(2){animation-delay:5s}
-.slide:nth-child(3){animation-delay:10s}
 
 /* 交叉淡入淡出：可視 0–30%，在 33% 前後切換 */
 @keyframes heroFade{
