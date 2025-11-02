@@ -141,3 +141,22 @@ img{display:block;width:100%;height:auto;border-radius:12px}
 .reveal.in{opacity:1;transform:translateY(0)}
 @media(max-width:980px){.about-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}.testimonials{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.kpi-grid{grid-template-columns:1fr}.testimonials{grid-template-columns:1fr}}
+
+/* ===== Contact Page ===== */
+.contact-hero{text-align:center;padding:48px 18px 20px;background:#0f0f0f}
+.contact-hero h1{margin:0;font-size:28px}
+.contact-hero p{color:var(--muted);max-width:600px;margin:10px auto 0}
+.contact-form{max-width:720px;margin:36px auto;padding:0 18px}
+.form-grid{display:flex;flex-direction:column;gap:14px}
+.form-grid label{display:flex;flex-direction:column;gap:6px;color:#ccc}
+input,textarea{background:#111;border:1px solid var(--line);border-radius:10px;padding:10px 14px;color:#fff;font-family:inherit;font-size:15px;transition:border .25s}
+input:focus,textarea:focus{outline:none;border-color:var(--warm)}
+.btn{display:inline-block;background:var(--warm);color:#111;padding:10px 24px;border-radius:30px;border:none;cursor:pointer;transition:.25s}
+.btn:hover{opacity:.85}
+.form-status{text-align:center;margin-top:16px;font-size:14px;color:var(--muted)}
+.contact-info{background:#0f0f0f;border-top:1px solid var(--line);padding:32px 18px 60px;text-align:center}
+.contact-info .info-box{max-width:720px;margin:0 auto}
+.contact-info ul{list-style:none;padding:0;margin:12px 0 0}
+.contact-info li{color:var(--muted);margin-bottom:6px}
+.contact-info a{color:var(--warm);text-decoration:none}
+.contact-info a:hover{text-decoration:underline}
