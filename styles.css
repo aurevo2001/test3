@@ -20,7 +20,7 @@ img{display:block;width:100%;height:auto;border-radius:12px}
 .site-nav a.active,.site-nav a:hover{background:rgba(255,255,255,.08)}
 
 /* ====== HERO（正方形框 + 自動輪播 + 左下漸層） ====== */
-.hero-showcase{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:#000}
+.hero-showcase{position:relative;width:100%;aspect-ratio:16/9;max-height:560px;overflow:hidden;background:#000}
 .hero-slider{position:absolute;inset:0;overflow:hidden}
 .track{display:flex;height:100%;transition:transform .7s ease}
 .slide{flex:0 0 100%;position:relative}
@@ -49,8 +49,8 @@ img{display:block;width:100%;height:auto;border-radius:12px}
 .section-title{text-align:center;font-size:24px;margin-bottom:22px;letter-spacing:.04em}
 .grid{display:grid;gap:18px}
 .gallery{grid-template-columns:repeat(3,minmax(0,1fr))}
-.gallery .card{position:relative;overflow:hidden;border-radius:14px;transition:transform .3s ease,box-shadow .3s ease}
-.gallery .card img{width:100%;height:100%;object-fit:cover;border-radius:14px}
+.gallery .card{position:relative;overflow:hidden;border-radius:14px;transition:transform .3s ease,box-shadow .3s ease;aspect-ratio:1/1;background:#000}
+.gallery .card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:14px}
 .gallery .card span{position:absolute;left:12px;bottom:10px;font-size:14px;font-weight:500;background:rgba(0,0,0,.45);padding:4px 10px;border-radius:8px}
 .gallery .card:hover{transform:translateY(-4px);box-shadow:0 8px 18px rgba(0,0,0,.35)}
 
@@ -79,17 +79,9 @@ img{display:block;width:100%;height:auto;border-radius:12px}
 .social-icons a:hover{color:var(--warm)}
 
 /* ====== RWD ====== */
-@media(max-width:980px){
-  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .features{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .hero-caption h1{font-size:28px}
-}
-@media(max-width:640px){
-  .gallery{grid-template-columns:1fr}
-  .features{grid-template-columns:1fr}
-  .hero-caption{left:14px;bottom:16px}
-  .footer-inner{flex-direction:column;gap:10px;text-align:center}
-}
+@media(max-width:980px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.features{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-caption h1{font-size:28px}.hero-showcase{max-height:520px}}
+ 
+@media(max-width:640px){.gallery{grid-template-columns:1fr}.features{grid-template-columns:1fr}.hero-caption{left:14px;bottom:16px}.footer-inner{flex-direction:column;gap:10px;text-align:center}.hero-showcase{aspect-ratio:4/3;max-height:460px}}
 
 /* ==== Portfolio 2.1 美化區 ==== */
 .pf-hero{padding:42px 18px 22px;border-bottom:1px solid var(--line);background:#0f0f0f}
