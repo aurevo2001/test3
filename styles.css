@@ -27,16 +27,20 @@ img{display:block;width:100%;height:auto;border-radius:12px}
 .slide img{width:100%;height:100%;object-fit:cover;object-position:center}
 
 /* 左下透明漸層區塊 */
-.hero-showcase::after{
-  content:"";position:absolute;left:0;bottom:0;width:62%;height:40%;
-  background:linear-gradient(90deg,rgba(255,255,255,.72) 0%,rgba(255,255,255,.35) 42%,rgba(255,255,255,0) 100%);
-  clip-path:polygon(0% 64%,44% 64%,62% 100%,0% 100%);pointer-events:none;
-}
+.hero-showcase::after{content:none}
 
 /* HERO 文字 */
-.hero-caption{position:absolute;left:5%;bottom:11%;z-index:2;color:#111;max-width:42%;overflow:hidden;text-overflow:ellipsis}
-.hero-caption h1{font-size:32px;margin-bottom:4px;line-height:1.2}
-.hero-caption p{font-size:16px;color:#333;line-height:1.6}
+/* 文字容器＝梯形本體（只此一塊） */
+.hero-caption{
+  position:absolute;left:0;bottom:0;z-index:2;color:#111;
+  width:62%;height:40%; /* 尺寸與你原本 after 相同 */
+  padding:18px 22px;display:flex;flex-direction:column;gap:6px;justify-content:flex-start;
+  background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.55));
+  clip-path:polygon(0 0,100% 0,85% 100%,0 100%); /* 右側斜切，形成梯形 */
+  overflow:hidden; /* 防止文字超出梯形外 */
+}
+.hero-caption h1{margin:0;font-size:34px;line-height:1.15}
+.hero-caption p{margin:0;font-size:16px;color:#222;line-height:1.5}
 
 /* ====== 首頁作品精選 ====== */
 .section{padding:54px 18px}
@@ -73,8 +77,10 @@ img{display:block;width:100%;height:auto;border-radius:12px}
 .social-icons a:hover{color:var(--warm)}
 
 /* ====== RWD ====== */
-@media(max-width:980px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.features{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-caption h1{font-size:28px}.hero-showcase{max-height:520px}}
-@media(max-width:640px){.gallery{grid-template-columns:1fr}.features{grid-template-columns:1fr}.hero-caption{left:14px;bottom:16px}.footer-inner{flex-direction:column;gap:10px;text-align:center}.hero-showcase{aspect-ratio:4/3;max-height:460px}}
+@media(max-width:980px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.features{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-caption{width:70%;height:46%;padding:14px 16px}
+.hero-caption h1{font-size:28px}.hero-showcase{max-height:520px}}
+@media(max-width:640px){.gallery{grid-template-columns:1fr}.features{grid-template-columns:1fr}.hero-caption{width:82%;height:52%}
+.hero-caption h1{font-size:24px}.footer-inner{flex-direction:column;gap:10px;text-align:center}.hero-showcase{aspect-ratio:4/3;max-height:460px}}
 
 /* ==== Portfolio 2.1 美化區 ==== */
 .pf-hero{padding:42px 18px 22px;border-bottom:1px solid var(--line);background:#0f0f0f}
