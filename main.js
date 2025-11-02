@@ -29,3 +29,37 @@
   hero.addEventListener('mouseenter',stop);
   hero.addEventListener('mouseleave',start);
 })();
+/* ==== Portfolio 2.1：篩選 + Lightbox（與首頁共用 main.js） ==== */
+(function(){
+  const filterBtns=[...document.querySelectorAll('.filter-btn')];
+  const items=[...document.querySelectorAll('.m-item')];
+  if(filterBtns.length){
+    function applyFilter(cat){
+      items.forEach(i=>{
+        const ok=(cat==='all'||i.dataset.category===cat);
+        i.style.display=ok?'block':'none';
+      });
+    }
+    filterBtns.forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        filterBtns.forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        applyFilter(btn.dataset.filter);
+      });
+    });
+    applyFilter('all');
+  }
+  // Lightbox
+  const lightbox=document.getElementById('lightbox');
+  const lbImg=document.getElementById('lightboxImg');
+  const lbClose=document.getElementById('lightboxClose');
+  if(lightbox&&lbImg){
+    document.querySelectorAll('.m-item img').forEach(img=>{
+      img.addEventListener('click',()=>{lightbox.classList.add('active');lbImg.src=img.src;lbImg.alt=img.alt||'';});
+    });
+    const close=()=>{lightbox.classList.remove('active');lbImg.src='';};
+    if(lbClose) lbClose.addEventListener('click',close);
+    lightbox.addEventListener('click',e=>{if(e.target===lightbox) close();});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&lightbox.classList.contains('active')) close();});
+  }
+})();
