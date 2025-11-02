@@ -23,6 +23,26 @@
   document.addEventListener('visibilitychange',()=>{ if(!document.hidden) start(); });
 })();
 
+/* Reveal：有 IO 用滑入，沒有就直接顯示，避免內容消失 */
+(function(){
+  const els=[...document.querySelectorAll('.reveal')];
+  if(!els.length) return;
+
+  function showAll(){ els.forEach(el=>el.classList.add('in')); }
+
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }});
+    },{threshold:.12, rootMargin:'0px 0px -10% 0px'});
+    els.forEach(el=>io.observe(el));
+
+    // 保底：2 秒後仍未顯示者，強制顯示
+    setTimeout(()=>{ els.forEach(el=>{ if(!el.classList.contains('in')) el.classList.add('in'); }); }, 2000);
+  }else{
+    showAll();
+  }
+})();
+
 /* ==== Portfolio 2.1：篩選 + Lightbox（與首頁共用 main.js） ==== */
 (function(){
   const filterBtns=[...document.querySelectorAll('.filter-btn')];
