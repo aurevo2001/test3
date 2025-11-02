@@ -1,4 +1,4 @@
-/* ===== HERO 自動輪播（以容器寬度(px)位移，逐張穩定） ===== */
+/* ===== HERO 自動輪播（逐張 % 位移，最穩定） ===== */
 (function(){
   const hero=document.querySelector('.hero-showcase'); if(!hero) return;
   const track=hero.querySelector('.track'); if(!track) return;
@@ -6,34 +6,28 @@
   const title=document.getElementById('heroTitle');
   const desc=document.getElementById('heroDesc');
 
+  const n=slides.length;
+  const per=100/n;                 // 每張在「軌道」上的百分比
+  slides.forEach(s=>{ s.style.flex=`0 0 ${per}%`; }); // 讓每張剛好佔 per%
+  // 注意：這行會覆蓋你 CSS 裡原本 .slide{flex:0 0 100%}，是我們要的
+
   let index=0, delay=3500, timer=null;
 
-  function slideWidth(){ return hero.getBoundingClientRect().width; }
-
-  function showSlide(n){
-    index=(n+slides.length)%slides.length;
-    const offset=-(index*slideWidth());            // 用容器寬度(px)計算位移
-    track.style.transform=`translateX(${offset}px)`;
+  function showSlide(i){
+    index=(i+n)%n;
+    const offset=-(index*per);     // 依每張的佔比來位移
+    track.style.transform=`translateX(${offset}%)`;
     const s=slides[index];
     if(title) title.textContent=s.dataset.title||'';
     if(desc)  desc.textContent=s.dataset.desc||'';
   }
-
   function start(){ if(timer) clearInterval(timer); timer=setInterval(()=>showSlide(index+1),delay); }
-  function stop(){ if(timer){ clearInterval(timer); timer=null; } }
 
   // 初始化
   showSlide(0); start();
 
-  // 視窗可見時恢復播放
+  // 視窗可見時自動恢復
   document.addEventListener('visibilitychange',()=>{ if(!document.hidden) start(); });
-
-  // 重新計算寬度（RWD）保持在正確張數
-  let t; window.addEventListener('resize',()=>{ clearTimeout(t); t=setTimeout(()=>showSlide(index),120); });
-
-  // 若想滑鼠經過暫停，解除註解即可
-  // hero.addEventListener('mouseenter',stop);
-  // hero.addEventListener('mouseleave',start);
 })();
 
 /* Reveal：有 IO 用滑入，沒有就直接顯示，避免內容消失 */
